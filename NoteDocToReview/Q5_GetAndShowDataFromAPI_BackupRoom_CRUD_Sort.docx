@@ -1,0 +1,875 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset163 Calibri;}{\f2\fnil\fcharset238 Calibri;}}
+{\colortbl ;\red0\green0\blue255;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs24\lang9 H\'e3y t\f1\lang1066\u7893?ng h\u7907?p idea v\f0\lang1033\'e0 c\'e1ch tri\f1\lang1066\u7875?n khai b\u7841?n v\u7915?a m\u7899?i tr\f0\lang1033\'ecnh b\'e0y \f1\lang1066\u7903? tr\f0\lang1033\'ean gi\'fap t\'f4i \f2\'f0\f1\lang1066\u7875? t\f0\lang1033\'f4i c\'f3 th\f1\lang1066\u7875? vi\u7871?t t\f0\lang1033\'e0i li\f1\lang1066\u7879?u l\u7841?i sau n\f0\lang1033\'e0y c\'f3 th\f1\lang1066\u7875? \f0\lang1033\'f4n t\f1\lang1066\u7853?p\par
+\par
+\par
+\par
+\par
+D\f2\u432?\f1\u7899?i \f2\'f0\f0\lang1033\'e2y l\'e0 t\f1\lang1066\u7893?ng h\u7907?p idea v\f0\lang1033\'e0 c\'e1ch tri\f1\lang1066\u7875?n khai cho vi\u7879?c t\f0\lang1033\'edch h\f1\lang1066\u7907?p c\f2\u417? ch\f1\u7871? C\f0\lang1033\'e2u 1 (g\f1\lang1066\u7885?i API, l\u7845?y t\u7915? DAO gi\u7843? l\u7853?p n\u7871?u API th\u7845?t b\u7841?i) v\f0\lang1033\'e0 C\'e2u 5 (l\f2\u432?u danh s\f0\'e1ch sinh vi\'ean v\'e0o Room Database, th\'eam/x\'f3a/s\f1\lang1066\u7917?a, s\u7855?p x\u7871?p theo first_name + last_name) s\u7917? d\u7909?ng AsyncTask thay v\f0\lang1033\'ec Coroutines trong StudentRepository. N\f1\lang1066\u7897?i dung \f2\'f0\u432?\f1\u7907?c tr\f0\lang1033\'ecnh b\'e0y ng\f1\lang1066\u7855?n g\u7885?n, r\f0\lang1033\'f5 r\'e0ng, d\f1\lang1066\u7877? hi\u7875?u \f2\'f0\f1\u7875? b\u7841?n vi\u7871?t t\f0\lang1033\'e0i li\f1\lang1066\u7879?u \f0\lang1033\'f4n t\f1\lang1066\u7853?p.\par
+\par
+Idea ch\f0\lang1033\'ednh\par
+M\f1\lang1066\u7909?c ti\f0\lang1033\'eau:\par
+C\'e2u 1: G\f1\lang1066\u7885?i API {{\field{\*\fldinst{HYPERLINK https://reqres.in/api/users?page=1 }}{\fldrslt{https://reqres.in/api/users?page=1\ul0\cf0}}}}\f1\fs24  v\u7899?i header x-api-key: reqres-free-v1. N\u7871?u API th\u7845?t b\u7841?i, l\u7845?y d\u7919? li\u7879?u t\u7915? DAO gi\u7843? l\u7853?p.\par
+C\f0\lang1033\'e2u 5: L\f2\u432?u danh s\f0\'e1ch sinh vi\'ean v\'e0o Room Database (n\f1\lang1066\u7871?u Room r\u7895?ng), h\u7895? tr\u7907? th\f0\lang1033\'eam/x\'f3a/s\f1\lang1066\u7917?a, hi\u7875?n th\u7883? danh s\f0\lang1033\'e1ch t\f1\lang1066\u7915? Room khi m\u7903? \u7913?ng d\u7909?ng, th\f0\lang1033\'eam n\'fat "S\f1\lang1066\u7855?p x\u7871?p" theo first_name + last_name.\par
+\f0\lang1033\'dd t\f2\u432?\f1\lang1066\u7903?ng:\par
+API: S\u7917? d\u7909?ng Retrofit v\u7899?i OkHttp \f2\'f0\f1\u7875? g\u7885?i API, th\f0\lang1033\'eam header x-api-key.\par
+DAO gi\f1\lang1066\u7843? l\u7853?p: Cung c\u7845?p d\u7919? li\u7879?u m\u7851?u (2 sinh vi\f0\lang1033\'ean) khi API th\f1\lang1066\u7845?t b\u7841?i.\par
+Room Database: L\f2\u432?u tr\f1\u7919? danh s\f0\lang1033\'e1ch sinh vi\'ean, ki\f1\lang1066\u7875?m tra Room tr\f2\u432?\f1\u7899?c khi g\u7885?i API, ch\u7881? l\f2\u432?u n\f1\u7871?u Room r\u7895?ng.\par
+Repository: Qu\u7843?n l\f0\lang1033\'fd d\f1\lang1066\u7919? li\u7879?u t\u7915? API/DAO/Room, d\f0\lang1033\'f9ng AsyncTask \f2\'f0\f1\lang1066\u7875? x\u7917? l\f0\lang1033\'fd Room b\f1\lang1066\u7845?t \f2\'f0\f1\u7891?ng b\u7897?.\par
+ViewModel: Ch\u7901? d\u7919? li\u7879?u t\u7915? Repository, h\u7895? tr\u7907? s\u7855?p x\u7871?p, th\f0\lang1033\'eam/x\'f3a/s\f1\lang1066\u7917?a, cung c\u7845?p LiveData cho UI.\par
+MainActivity: Hi\u7875?n th\u7883? danh s\f0\lang1033\'e1ch trong RecyclerView, h\f1\lang1066\u7895? tr\u7907? th\f0\lang1033\'eam/x\'f3a/s\f1\lang1066\u7917?a qua giao di\u7879?n, hi\u7875?n th\u7883? ProgressBar khi loading.\par
+Ki\u7871?n tr\f0\lang1033\'fac MVVM:\par
+Model: Student, StudentResponse, StudentDao, AppDatabase.\par
+View: MainActivity, RecyclerView.\par
+ViewModel: StudentViewModel (qu\f1\lang1066\u7843?n l\f0\lang1033\'fd logic, d\f1\lang1066\u7919? li\u7879?u).\par
+Repository: StudentRepository (x\u7917? l\f0\lang1033\'fd API, DAO, Room).\par
+Y\'eau c\f1\lang1066\u7847?u \f2\'f0\f1\u7863?c bi\u7879?t:\par
+S\u7917? d\u7909?ng AsyncTask thay Coroutines \f2\'f0\f1\u7875? x\u7917? l\f0\lang1033\'fd Room b\f1\lang1066\u7845?t \f2\'f0\f1\u7891?ng b\u7897?.\par
+Th\f0\lang1033\'eam header x-api-key cho API.\par
+S\f1\lang1066\u7855?p x\u7871?p danh s\f0\lang1033\'e1ch theo first_name + last_name khi nh\f1\lang1066\u7845?n n\f0\lang1033\'fat "S\f1\lang1066\u7855?p x\u7871?p".\par
+Hi\u7875?n th\u7883? danh s\f0\lang1033\'e1ch t\f1\lang1066\u7915? Room khi m\u7903? \u7913?ng d\u7909?ng.\par
+Tr\f0\lang1033\'e1nh l\f1\lang1066\u7895?i NullPointerException b\u7857?ng c\f0\lang1033\'e1ch kh\f1\lang1066\u7903?i t\u7841?o danh s\f0\lang1033\'e1ch r\f1\lang1066\u7895?ng v\f0\lang1033\'e0 ki\f1\lang1066\u7875?m tra null.\par
+C\f0\lang1033\'e1ch tri\f1\lang1066\u7875?n khai\par
+1. C\u7845?u h\f0\lang1033\'ecnh build.gradle\par
+M\f1\lang1066\u7909?c \f2\'f0\f0\lang1033\'edch: Th\'eam th\f2\u432? vi\f1\lang1066\u7879?n c\u7847?n thi\u7871?t, lo\u7841?i b\u7887? Coroutines v\f0\lang1033\'ec d\'f9ng AsyncTask.\par
+File: app/build.gradle\par
+groovy\par
+\par
+Collapse\par
+\par
+Wrap\par
+\par
+Copy\par
+plugins \{\par
+    id 'com.android.application'\par
+\}\par
+\par
+android \{\par
+    namespace 'com.example.studentlistapp'\par
+    compileSdk 35\par
+    defaultConfig \{\par
+        applicationId "com.example.studentlistapp"\par
+        minSdk 24\par
+        targetSdk 35\par
+        versionCode 1\par
+        versionName "1.0"\par
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"\par
+    \}\par
+    buildTypes \{\par
+        release \{\par
+            minifyEnabled false\par
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'\par
+        \}\par
+    \}\par
+    compileOptions \{\par
+        sourceCompatibility JavaVersion.VERSION_11\par
+        targetCompatibility JavaVersion.VERSION_11\par
+    \}\par
+    buildFeatures \{\par
+        viewBinding true\par
+    \}\par
+\}\par
+\par
+dependencies \{\par
+    implementation 'androidx.appcompat:appcompat:1.6.1'\par
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'\par
+    implementation 'androidx.lifecycle:lifecycle-livedata:2.6.1'\par
+    implementation 'androidx.lifecycle:lifecycle-viewmodel:2.6.1'\par
+    implementation 'androidx.recyclerview:recyclerview:1.3.0'\par
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'\par
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'\par
+    implementation 'com.squareup.okhttp3:okhttp:4.10.0'\par
+    implementation 'com.github.bumptech.glide:glide:4.15.1'\par
+    implementation 'androidx.room:room-runtime:2.5.2'\par
+    annotationProcessor 'androidx.room:room-compiler:2.5.2'\par
+    testImplementation 'junit:junit:4.13.2'\par
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'\par
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'\par
+\}\par
+\'dd t\f2\u432?\f1\lang1066\u7903?ng: H\u7895? tr\u7907? Retrofit (API), Room (database), Glide (t\u7843?i \u7843?nh), LiveData (c\u7853?p nh\u7853?t UI).\par
+2. C\u7845?u h\f0\lang1033\'ecnh AndroidManifest.xml\par
+M\f1\lang1066\u7909?c \f2\'f0\f0\lang1033\'edch: C\f1\lang1066\u7845?p quy\u7873?n Internet cho API.\par
+xml\par
+\par
+Collapse\par
+\par
+Wrap\par
+\par
+Copy\par
+<uses-permission android:name="android.permission.INTERNET" />\par
+3. T\u7841?o Model\par
+Entity Student: Th\f0\lang1033\'eam annotation @Entity cho Room.\par
+File: app/src/main/java/com/example/studentlistapp/model/Student.java\par
+java\par
+\par
+Collapse\par
+\par
+Wrap\par
+\par
+Copy\par
+package com.example.studentlistapp.model;\par
+\par
+import androidx.room.Entity;\par
+import androidx.room.PrimaryKey;\par
+\par
+@Entity(tableName = "students")\par
+public class Student \{\par
+    @PrimaryKey\par
+    private int id;\par
+    private String email;\par
+    private String first_name;\par
+    private String last_name;\par
+    private String avatar;\par
+\par
+    public Student(int id, String email, String first_name, String last_name, String avatar) \{\par
+        this.id = id;\par
+        this.email = email;\par
+        this.first_name = first_name;\par
+        this.last_name = last_name;\par
+        this.avatar = avatar;\par
+    \}\par
+\par
+    public int getId() \{ return id; \}\par
+    public void setId(int id) \{ this.id = id; \}\par
+    public String getEmail() \{ return email; \}\par
+    public void setEmail(String email) \{ this.email = email; \}\par
+    public String getFirst_name() \{ return first_name; \}\par
+    public void setFirst_name(String first_name) \{ this.first_name = first_name; \}\par
+    public String getLast_name() \{ return last_name; \}\par
+    public void setLast_name(String last_name) \{ this.last_name = last_name; \}\par
+    public String getAvatar() \{ return avatar; \}\par
+    public void setAvatar(String avatar) \{ this.avatar = avatar; \}\par
+\}\par
+StudentResponse: D\'e0nh cho API.\par
+File: app/src/main/java/com/example/studentlistapp/model/StudentResponse.java\par
+java\par
+\par
+Collapse\par
+\par
+Wrap\par
+\par
+Copy\par
+package com.example.studentlistapp.model;\par
+\par
+import java.util.List;\par
+\par
+public class StudentResponse \{\par
+    private List<Student> data;\par
+\par
+    public List<Student> getData() \{ return data; \}\par
+\}\par
+4. T\f1\lang1066\u7841?o DAO cho Room\par
+M\u7909?c \f2\'f0\f0\lang1033\'edch: \f2\'d0\f1\lang1066\u7883?nh ngh\f2\u297?a c\f0\lang1033\'e1c thao t\'e1c th\'eam, x\'f3a, s\f1\lang1066\u7917?a, l\u7845?y danh s\f0\lang1033\'e1ch.\par
+File: app/src/main/java/com/example/studentlistapp/data/StudentDao.java\par
+java\par
+\par
+Collapse\par
+\par
+Wrap\par
+\par
+Copy\par
+package com.example.studentlistapp.data;\par
+\par
+import androidx.room.Dao;\par
+import androidx.room.Delete;\par
+import androidx.room.Insert;\par
+import androidx.room.OnConflictStrategy;\par
+import androidx.room.Query;\par
+import androidx.room.Update;\par
+import com.example.studentlistapp.model.Student;\par
+import java.util.List;\par
+\par
+@Dao\par
+public interface StudentDao \{\par
+    @Query("SELECT * FROM students")\par
+    List<Student> getAllStudents();\par
+\par
+    @Insert(onConflict = OnConflictStrategy.IGNORE)\par
+    void insert(List<Student> students);\par
+\par
+    @Insert\par
+    void insertStudent(Student student);\par
+\par
+    @Delete\par
+    void delete(Student student);\par
+\par
+    @Update\par
+    void update(Student student);\par
+\par
+    @Query("SELECT COUNT(*) FROM students")\par
+    int getStudentCount();\par
+\}\par
+5. T\f1\lang1066\u7841?o Room Database\par
+File: app/src/main/java/com/example/studentlistapp/data/AppDatabase.java\par
+java\par
+\par
+Collapse\par
+\par
+Wrap\par
+\par
+Copy\par
+package com.example.studentlistapp.data;\par
+\par
+import androidx.room.Database;\par
+import androidx.room.RoomDatabase;\par
+import com.example.studentlistapp.model.Student;\par
+\par
+@Database(entities = \{Student.class\}, version = 1)\par
+public abstract class AppDatabase extends RoomDatabase \{\par
+    public abstract StudentDao studentDao();\par
+\}\par
+6. T\u7841?o API Interface\par
+File: app/src/main/java/com/example/studentlistapp/api/ApiService.java\par
+java\par
+\par
+Collapse\par
+\par
+Wrap\par
+\par
+Copy\par
+package com.example.studentlistapp.api;\par
+\par
+import com.example.studentlistapp.model.StudentResponse;\par
+import retrofit2.Call;\par
+import retrofit2.http.GET;\par
+\par
+public interface ApiService \{\par
+    @GET("users?page=1")\par
+    Call<StudentResponse> getStudents();\par
+\}\par
+7. T\u7841?o Repository StudentRepository\par
+M\u7909?c \f2\'f0\f0\lang1033\'edch: G\f1\lang1066\u7885?i API, l\u7845?y t\u7915? DAO gi\u7843? l\u7853?p n\u7871?u API th\u7845?t b\u7841?i, l\f2\u432?u v\f0\lang1033\'e0o Room n\f1\lang1066\u7871?u r\u7895?ng, d\f0\lang1033\'f9ng AsyncTask cho Room.\par
+File: app/src/main/java/com/example/studentlistapp/repository/StudentRepository.java\par
+java\par
+\par
+Collapse\par
+\par
+Wrap\par
+\par
+Copy\par
+package com.example.studentlistapp.repository;\par
+\par
+import android.content.Context;\par
+import android.os.AsyncTask;\par
+import androidx.lifecycle.MutableLiveData;\par
+import androidx.room.Room;\par
+import com.example.studentlistapp.api.ApiService;\par
+import com.example.studentlistapp.data.AppDatabase;\par
+import com.example.studentlistapp.data.StudentDao;\par
+import com.example.studentlistapp.model.Student;\par
+import com.example.studentlistapp.model.StudentResponse;\par
+import java.util.ArrayList;\par
+import java.util.List;\par
+import retrofit2.Call;\par
+import retrofit2.Callback;\par
+import retrofit2.Response;\par
+import retrofit2.Retrofit;\par
+import retrofit2.converter.gson.GsonConverterFactory;\par
+import okhttp3.OkHttpClient;\par
+import okhttp3.Request;\par
+\par
+public class StudentRepository \{\par
+    private ApiService apiService;\par
+    private StudentDao studentDao;\par
+    private MutableLiveData<List<Student>> studentList;\par
+\par
+    public StudentRepository(Context context) \{\par
+        OkHttpClient client = new OkHttpClient.Builder()\par
+                .addInterceptor(chain -> \{\par
+                    Request newRequest = chain.request().newBuilder()\par
+                            .addHeader("x-api-key", "reqres-free-v1")\par
+                            .build();\par
+                    return chain.proceed(newRequest);\par
+                \})\par
+                .build();\par
+        Retrofit retrofit = new Retrofit.Builder()\par
+                .baseUrl("https://reqres.in/api/")\par
+                .addConverterFactory(GsonConverterFactory.create())\par
+                .client(client)\par
+                .build();\par
+        apiService = retrofit.create(ApiService.class);\par
+\par
+        AppDatabase db = Room.databaseBuilder(context, AppDatabase.class, "student-database")\par
+                .build();\par
+        studentDao = db.studentDao();\par
+\par
+        studentList = new MutableLiveData<>(new ArrayList<>());\par
+    \}\par
+\par
+    public MutableLiveData<List<Student>> getStudents() \{\par
+        new AsyncTask<Void, Void, List<Student>>() \{\par
+            @Override\par
+            protected List<Student> doInBackground(Void... voids) \{\par
+                if (studentDao.getStudentCount() > 0) \{\par
+                    return studentDao.getAllStudents();\par
+                \}\par
+                return null;\par
+            \}\par
+\par
+            @Override\par
+            protected void onPostExecute(List<Student> localStudents) \{\par
+                if (localStudents != null && !localStudents.isEmpty()) \{\par
+                    studentList.setValue(localStudents);\par
+                \} else \{\par
+                    apiService.getStudents().enqueue(new Callback<StudentResponse>() \{\par
+                        @Override\par
+                        public void onResponse(Call<StudentResponse> call, Response<StudentResponse> response) \{\par
+                            if (response.isSuccessful() && response.body() != null && response.body().getData() != null) \{\par
+                                List<Student> apiStudents = response.body().getData();\par
+                                new AsyncTask<Void, Void, Void>() \{\par
+                                    @Override\par
+                                    protected Void doInBackground(Void... voids) \{\par
+                                        studentDao.insert(apiStudents);\par
+                                        return null;\par
+                                    \}\par
+\par
+                                    @Override\par
+                                    protected void onPostExecute(Void aVoid) \{\par
+                                        studentList.setValue(apiStudents);\par
+                                    \}\par
+                                \}.execute();\par
+                            \} else \{\par
+                                List<Student> daoStudents = getDaoStudents();\par
+                                new AsyncTask<Void, Void, Void>() \{\par
+                                    @Override\par
+                                    protected Void doInBackground(Void... voids) \{\par
+                                        studentDao.insert(daoStudents);\par
+                                        return null;\par
+                                    \}\par
+\par
+                                    @Override\par
+                                    protected void onPostExecute(Void aVoid) \{\par
+                                        studentList.setValue(daoStudents);\par
+                                    \}\par
+                                \}.execute();\par
+                            \}\par
+                        \}\par
+\par
+                        @Override\par
+                        public void onFailure(Call<StudentResponse> call, Throwable t) \{\par
+                            List<Student> daoStudents = getDaoStudents();\par
+                            new AsyncTask<Void, Void, Void>() \{\par
+                                @Override\par
+                                protected Void doInBackground(Void... voids) \{\par
+                                    studentDao.insert(daoStudents);\par
+                                    return null;\par
+                                \}\par
+\par
+                                @Override\par
+                                protected void onPostExecute(Void aVoid) \{\par
+                                    studentList.setValue(daoStudents);\par
+                                \}\par
+                            \}.execute();\par
+                        \}\par
+                    \});\par
+                \}\par
+            \}\par
+        \}.execute();\par
+        return studentList;\par
+    \}\par
+\par
+    private List<Student> getDaoStudents() \{\par
+        List<Student> students = new ArrayList<>();\par
+        students.add(new Student(1, "george.bluth@reqres.in", "George", "Bluth", "{{\field{\*\fldinst{HYPERLINK https://reqres.in/img/faces/1-image.jpg }}{\fldrslt{https://reqres.in/img/faces/1-image.jpg\ul0\cf0}}}}\f0\fs24 "));\par
+        students.add(new Student(2, "janet.weaver@reqres.in", "Janet", "Weaver", "{{\field{\*\fldinst{HYPERLINK https://reqres.in/img/faces/2-image.jpg }}{\fldrslt{https://reqres.in/img/faces/2-image.jpg\ul0\cf0}}}}\f0\fs24 "));\par
+        return students;\par
+    \}\par
+\par
+    public void addStudent(Student student) \{\par
+        new AsyncTask<Void, Void, List<Student>>() \{\par
+            @Override\par
+            protected List<Student> doInBackground(Void... voids) \{\par
+                studentDao.insertStudent(student);\par
+                return studentDao.getAllStudents();\par
+            \}\par
+\par
+            @Override\par
+            protected void onPostExecute(List<Student> updatedList) \{\par
+                studentList.setValue(updatedList);\par
+            \}\par
+        \}.execute();\par
+    \}\par
+\par
+    public void deleteStudent(Student student) \{\par
+        new AsyncTask<Void, Void, List<Student>>() \{\par
+            @Override\par
+            protected List<Student> doInBackground(Void... voids) \{\par
+                studentDao.delete(student);\par
+                return studentDao.getAllStudents();\par
+            \}\par
+\par
+            @Override\par
+            protected void onPostExecute(List<Student> updatedList) \{\par
+                studentList.setValue(updatedList);\par
+            \}\par
+        \}.execute();\par
+    \}\par
+\par
+    public void updateStudent(Student student) \{\par
+        new AsyncTask<Void, Void, List<Student>>() \{\par
+            @Override\par
+            protected List<Student> doInBackground(Void... voids) \{\par
+                studentDao.update(student);\par
+                return studentDao.getAllStudents();\par
+            \}\par
+\par
+            @Override\par
+            protected void onPostExecute(List<Student> updatedList) \{\par
+                studentList.setValue(updatedList);\par
+            \}\par
+        \}.execute();\par
+    \}\par
+\}\par
+\'dd t\f2\u432?\f1\lang1066\u7903?ng:\par
+S\u7917? d\u7909?ng AsyncTask \f2\'f0\f1\u7875? ch\u7841?y c\f0\lang1033\'e1c thao t\'e1c Room (getStudentCount, getAllStudents, insert, insertStudent, delete, update) tr\'ean background thread.\par
+Ki\f1\lang1066\u7875?m tra Room tr\f2\u432?\f1\u7899?c, n\u7871?u c\f0\lang1033\'f3 d\f1\lang1066\u7919? li\u7879?u th\f0\lang1033\'ec l\f1\lang1066\u7845?y; n\u7871?u kh\f0\lang1033\'f4ng, g\f1\lang1066\u7885?i API v\f0\lang1033\'e0 l\f2\u432?u v\f0\'e0o Room.\par
+N\f1\lang1066\u7871?u API th\u7845?t b\u7841?i, l\u7845?y t\u7915? DAO gi\u7843? l\u7853?p v\f0\lang1033\'e0 l\f2\u432?u v\f0\'e0o Room.\par
+C\f1\lang1066\u7853?p nh\u7853?t studentList qua LiveData \f2\'f0\f1\u7875? th\f0\lang1033\'f4ng b\'e1o UI.\par
+8. T\f1\lang1066\u7841?o ViewModel StudentViewModel\par
+M\u7909?c \f2\'f0\f0\lang1033\'edch: Qu\f1\lang1066\u7843?n l\f0\lang1033\'fd d\f1\lang1066\u7919? li\u7879?u, ch\u7901? 2 gi\f0\lang1033\'e2y loading, h\f1\lang1066\u7895? tr\u7907? s\u7855?p x\u7871?p, th\f0\lang1033\'eam/x\'f3a/s\f1\lang1066\u7917?a.\par
+File: app/src/main/java/com/example/studentlistapp/viewmodel/StudentViewModel.java\par
+java\par
+\par
+Collapse\par
+\par
+Wrap\par
+\par
+Copy\par
+package com.example.studentlistapp.viewmodel;\par
+\par
+import android.content.Context;\par
+import androidx.lifecycle.LiveData;\par
+import androidx.lifecycle.MutableLiveData;\par
+import androidx.lifecycle.ViewModel;\par
+import com.example.studentlistapp.model.Student;\par
+import com.example.studentlistapp.repository.StudentRepository;\par
+import java.util.ArrayList;\par
+import java.util.Collections;\par
+import java.util.List;\par
+\par
+public class StudentViewModel extends ViewModel \{\par
+    private StudentRepository repository;\par
+    private MutableLiveData<List<Student>> studentList;\par
+    private MutableLiveData<Boolean> isLoading;\par
+\par
+    public StudentViewModel(Context context) \{\par
+        repository = new StudentRepository(context);\par
+        studentList = new MutableLiveData<>(new ArrayList<>());\par
+        isLoading = new MutableLiveData<>(true);\par
+        loadStudents();\par
+    \}\par
+\par
+    public LiveData<List<Student>> getStudentList() \{\par
+        return studentList;\par
+    \}\par
+\par
+    public LiveData<Boolean> getIsLoading() \{\par
+        return isLoading;\par
+    \}\par
+\par
+    private void loadStudents() \{\par
+        repository.getStudents().observeForever(students -> \{\par
+            new android.os.Handler().postDelayed(() -> \{\par
+                studentList.setValue(students != null ? students : new ArrayList<>());\par
+                isLoading.setValue(false);\par
+            \}, 2000);\par
+        \});\par
+    \}\par
+\par
+    public void addStudent(String firstName, String lastName, String email) \{\par
+        int newId = studentList.getValue().size() + 1;\par
+        String avatar = "{{\field{\*\fldinst{HYPERLINK https://reqres.in/img/faces/ }}{\fldrslt{https://reqres.in/img/faces/\ul0\cf0}}}}\f1\fs24 " + newId + "-image.jpg";\par
+        Student student = new Student(newId, email, firstName, lastName, avatar);\par
+        repository.addStudent(student);\par
+    \}\par
+\par
+    public void deleteStudent(Student student) \{\par
+        repository.deleteStudent(student);\par
+    \}\par
+\par
+    public void updateStudent(Student student, String newEmail) \{\par
+        student.setEmail(newEmail);\par
+        repository.updateStudent(student);\par
+    \}\par
+\par
+    public void sortStudents() \{\par
+        List<Student> currentList = new ArrayList<>(studentList.getValue());\par
+        Collections.sort(currentList, (s1, s2) -> \{\par
+            String name1 = s1.getFirst_name() + " " + s1.getLast_name();\par
+            String name2 = s2.getFirst_name() + " " + s2.getLast_name();\par
+            return name1.compareTo(name2);\par
+        \});\par
+        studentList.setValue(currentList);\par
+    \}\par
+\}\par
+\f0\lang1033\'dd t\f2\u432?\f1\lang1066\u7903?ng:\par
+Quan s\f0\lang1033\'e1t studentList t\f1\lang1066\u7915? Repository, ch\u7901? 2 gi\f0\lang1033\'e2y tr\f2\u432?\f1\lang1066\u7899?c khi c\u7853?p nh\u7853?t UI.\par
+H\u7895? tr\u7907? th\f0\lang1033\'eam, x\'f3a, s\f1\lang1066\u7917?a sinh vi\f0\lang1033\'ean, s\f1\lang1066\u7855?p x\u7871?p theo first_name + last_name.\par
+9. T\u7841?o giao di\u7879?n\par
+Main Layout: Th\f0\lang1033\'eam n\'fat "S\f1\lang1066\u7855?p x\u7871?p" v\f0\lang1033\'e0 c\'e1c tr\f2\u432?\f1\lang1066\u7901?ng nh\u7853?p li\u7879?u.\par
+File: app/src/main/res/layout/activity_main.xml\par
+xml\par
+\par
+Collapse\par
+\par
+Wrap\par
+\par
+Copy\par
+<?xml version="1.0" encoding="utf-8"?>\par
+<androidx.constraintlayout.widget.ConstraintLayout\par
+    xmlns:android="http://schemas.android.com/apk/res/android"\par
+    xmlns:app="http://schemas.android.com/apk/res-auto"\par
+    android:layout_width="match_parent"\par
+    android:layout_height="match_parent">\par
+\par
+    <ProgressBar\par
+        android:id="@+id/progressBar"\par
+        android:layout_width="wrap_content"\par
+        android:layout_height="wrap_content"\par
+        android:visibility="gone"\par
+        app:layout_constraintBottom_toBottomOf="parent"\par
+        app:layout_constraintEnd_toEndOf="parent"\par
+        app:layout_constraintStart_toStartOf="parent"\par
+        app:layout_constraintTop_toTopOf="parent" />\par
+\par
+    <EditText\par
+        android:id="@+id/etFirstName"\par
+        android:layout_width="0dp"\par
+        android:layout_height="wrap_content"\par
+        android:hint="First Name"\par
+        android:layout_margin="8dp"\par
+        app:layout_constraintEnd_toStartOf="@id/etLastName"\par
+        app:layout_constraintStart_toStartOf="parent"\par
+        app:layout_constraintTop_toTopOf="parent" />\par
+\par
+    <EditText\par
+        android:id="@+id/etLastName"\par
+        android:layout_width="0dp"\par
+        android:layout_height="wrap_content"\par
+        android:hint="Last Name"\par
+        android:layout_margin="8dp"\par
+        app:layout_constraintEnd_toStartOf="@id/btnAdd"\par
+        app:layout_constraintStart_toEndOf="@id/etFirstName"\par
+        app:layout_constraintTop_toTopOf="parent" />\par
+\par
+    <Button\par
+        android:id="@+id/btnAdd"\par
+        android:layout_width="wrap_content"\par
+        android:layout_height="wrap_content"\par
+        android:text="Th\f0\lang1033\'eam"\par
+        android:layout_margin="8dp"\par
+        app:layout_constraintEnd_toEndOf="parent"\par
+        app:layout_constraintTop_toTopOf="parent" />\par
+\par
+    <EditText\par
+        android:id="@+id/etEmail"\par
+        android:layout_width="0dp"\par
+        android:layout_height="wrap_content"\par
+        android:hint="Email"\par
+        android:layout_margin="8dp"\par
+        app:layout_constraintEnd_toEndOf="parent"\par
+        app:layout_constraintStart_toStartOf="parent"\par
+        app:layout_constraintTop_toBottomOf="@id/etFirstName" />\par
+\par
+    <Button\par
+        android:id="@+id/btnSort"\par
+        android:layout_width="wrap_content"\par
+        android:layout_height="wrap_content"\par
+        android:text="S\f1\lang1066\u7855?p x\u7871?p"\par
+        android:layout_margin="8dp"\par
+        app:layout_constraintEnd_toEndOf="parent"\par
+        app:layout_constraintStart_toStartOf="parent"\par
+        app:layout_constraintTop_toBottomOf="@id/etEmail" />\par
+\par
+    <androidx.recyclerview.widget.RecyclerView\par
+        android:id="@+id/recyclerView"\par
+        android:layout_width="match_parent"\par
+        android:layout_height="0dp"\par
+        app:layout_constraintBottom_toBottomOf="parent"\par
+        app:layout_constraintEnd_toEndOf="parent"\par
+        app:layout_constraintStart_toStartOf="parent"\par
+        app:layout_constraintTop_toBottomOf="@id/btnSort" />\par
+\par
+</androidx.constraintlayout.widget.ConstraintLayout>\par
+Item Layout: Th\f0\lang1033\'eam n\'fat "X\'f3a" v\'e0 "S\f1\lang1066\u7917?a".\par
+File: app/src/main/res/layout/item_student.xml\par
+xml\par
+\par
+Collapse\par
+\par
+Wrap\par
+\par
+Copy\par
+<?xml version="1.0" encoding="utf-8"?>\par
+<androidx.constraintlayout.widget.ConstraintLayout\par
+    xmlns:android="http://schemas.android.com/apk/res/android"\par
+    xmlns:app="http://schemas.android.com/apk/res-auto"\par
+    android:layout_width="match_parent"\par
+    android:layout_height="wrap_content"\par
+    android:padding="8dp">\par
+\par
+    <ImageView\par
+        android:id="@+id/avatar"\par
+        android:layout_width="50dp"\par
+        android:layout_height="50dp"\par
+        app:layout_constraintStart_toStartOf="parent"\par
+        app:layout_constraintTop_toTopOf="parent" />\par
+\par
+    <TextView\par
+        android:id="@+id/tvName"\par
+        android:layout_width="0dp"\par
+        android:layout_height="wrap_content"\par
+        android:layout_marginStart="8dp"\par
+        android:textSize="16sp"\par
+        app:layout_constraintEnd_toStartOf="@id/btnDelete"\par
+        app:layout_constraintStart_toEndOf="@id/avatar"\par
+        app:layout_constraintTop_toTopOf="parent" />\par
+\par
+    <TextView\par
+        android:id="@+id/tvEmail"\par
+        android:layout_width="0dp"\par
+        android:layout_height="wrap_content"\par
+        android:layout_marginStart="8dp"\par
+        android:textSize="14sp"\par
+        app:layout_constraintEnd_toStartOf="@id/btnDelete"\par
+        app:layout_constraintStart_toEndOf="@id/avatar"\par
+        app:layout_constraintTop_toBottomOf="@id/tvName" />\par
+\par
+    <Button\par
+        android:id="@+id/btnDelete"\par
+        android:layout_width="wrap_content"\par
+        android:layout_height="wrap_content"\par
+        android:text="X\f0\lang1033\'f3a"\par
+        app:layout_constraintEnd_toStartOf="@id/btnEdit"\par
+        app:layout_constraintTop_toTopOf="parent" />\par
+\par
+    <Button\par
+        android:id="@+id/btnEdit"\par
+        android:layout_width="wrap_content"\par
+        android:layout_height="wrap_content"\par
+        android:text="S\f1\lang1066\u7917?a"\par
+        app:layout_constraintEnd_toEndOf="parent"\par
+        app:layout_constraintTop_toTopOf="parent" />\par
+\par
+</androidx.constraintlayout.widget.ConstraintLayout>\par
+10. T\u7841?o Adapter StudentAdapter\par
+File: app/src/main/java/com/example/studentlistapp/adapter/StudentAdapter.java\par
+java\par
+\par
+Collapse\par
+\par
+Wrap\par
+\par
+Copy\par
+package com.example.studentlistapp.adapter;\par
+\par
+import android.view.LayoutInflater;\par
+import android.view.View;\par
+import android.view.ViewGroup;\par
+import android.widget.Button;\par
+import android.widget.ImageView;\par
+import android.widget.TextView;\par
+import androidx.annotation.NonNull;\par
+import androidx.recyclerview.widget.RecyclerView;\par
+import com.bumptech.glide.Glide;\par
+import com.example.studentlistapp.R;\par
+import com.example.studentlistapp.model.Student;\par
+import java.util.ArrayList;\par
+import java.util.List;\par
+\par
+public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentViewHolder> \{\par
+    private List<Student> students = new ArrayList<>();\par
+    private OnStudentActionListener actionListener;\par
+\par
+    public interface OnStudentActionListener \{\par
+        void onDelete(Student student);\par
+        void onEdit(Student student);\par
+    \}\par
+\par
+    public void setOnStudentActionListener(OnStudentActionListener listener) \{\par
+        this.actionListener = listener;\par
+    \}\par
+\par
+    public void setStudents(List<Student> students) \{\par
+        this.students = students != null ? students : new ArrayList<>();\par
+        notifyDataSetChanged();\par
+    \}\par
+\par
+    @NonNull\par
+    @Override\par
+    public StudentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) \{\par
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_student, parent, false);\par
+        return new StudentViewHolder(view);\par
+    \}\par
+\par
+    @Override\par
+    public void onBindViewHolder(@NonNull StudentViewHolder holder, int position) \{\par
+        Student student = students.get(position);\par
+        holder.tvName.setText(student.getFirst_name() + " " + student.getLast_name());\par
+        holder.tvEmail.setText(student.getEmail());\par
+        Glide.with(holder.itemView.getContext()).load(student.getAvatar()).into(holder.avatar);\par
+\par
+        holder.btnDelete.setOnClickListener(v -> \{\par
+            if (actionListener != null) actionListener.onDelete(student);\par
+        \});\par
+\par
+        holder.btnEdit.setOnClickListener(v -> \{\par
+            if (actionListener != null) actionListener.onEdit(student);\par
+        \});\par
+    \}\par
+\par
+    @Override\par
+    public int getItemCount() \{\par
+        return students.size();\par
+    \}\par
+\par
+    static class StudentViewHolder extends RecyclerView.ViewHolder \{\par
+        ImageView avatar;\par
+        TextView tvName, tvEmail;\par
+        Button btnDelete, btnEdit;\par
+\par
+        public StudentViewHolder(@NonNull View itemView) \{\par
+            super(itemView);\par
+            avatar = itemView.findViewById(R.id.avatar);\par
+            tvName = itemView.findViewById(R.id.tvName);\par
+            tvEmail = itemView.findViewById(R.id.tvEmail);\par
+            btnDelete = itemView.findViewById(R.id.btnDelete);\par
+            btnEdit = itemView.findViewById(R.id.btnEdit);\par
+        \}\par
+    \}\par
+\}\par
+11. T\u7841?o MainActivity\par
+File: app/src/main/java/com/example/studentlistapp/MainActivity.java\par
+java\par
+\par
+Collapse\par
+\par
+Wrap\par
+\par
+Copy\par
+package com.example.studentlistapp;\par
+\par
+import android.os.Bundle;\par
+import android.view.View;\par
+import android.widget.Toast;\par
+import androidx.appcompat.app.AppCompatActivity;\par
+import androidx.lifecycle.ViewModelProvider;\par
+import androidx.recyclerview.widget.LinearLayoutManager;\par
+import com.example.studentlistapp.adapter.StudentAdapter;\par
+import com.example.studentlistapp.databinding.ActivityMainBinding;\par
+import com.example.studentlistapp.model.Student;\par
+import com.example.studentlistapp.viewmodel.StudentViewModel;\par
+\par
+public class MainActivity extends AppCompatActivity \{\par
+    private ActivityMainBinding binding;\par
+    private StudentViewModel viewModel;\par
+    private StudentAdapter adapter;\par
+\par
+    @Override\par
+    protected void onCreate(Bundle savedInstanceState) \{\par
+        super.onCreate(savedInstanceState);\par
+        binding = ActivityMainBinding.inflate(getLayoutInflater());\par
+        setContentView(binding.getRoot());\par
+\par
+        adapter = new StudentAdapter();\par
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));\par
+        binding.recyclerView.setAdapter(adapter);\par
+\par
+        viewModel = new ViewModelProvider(this, new ViewModelProvider.Factory() \{\par
+            @Override\par
+            public <T extends androidx.lifecycle.ViewModel> T create(Class<T> modelClass) \{\par
+                return (T) new StudentViewModel(getApplicationContext());\par
+            \}\par
+        \}).get(StudentViewModel.class);\par
+\par
+        viewModel.getStudentList().observe(this, students -> \{\par
+            adapter.setStudents(students);\par
+        \});\par
+\par
+        viewModel.getIsLoading().observe(this, isLoading -> \{\par
+            binding.progressBar.setVisibility(isLoading ? View.VISIBLE : View.GONE);\par
+        \});\par
+\par
+        binding.btnSort.setOnClickListener(v -> viewModel.sortStudents());\par
+\par
+        binding.btnAdd.setOnClickListener(v -> \{\par
+            String firstName = binding.etFirstName.getText().toString().trim();\par
+            String lastName = binding.etLastName.getText().toString().trim();\par
+            String email = binding.etEmail.getText().toString().trim();\par
+            if (!firstName.isEmpty() && !lastName.isEmpty() && !email.isEmpty()) \{\par
+                viewModel.addStudent(firstName, lastName, email);\par
+                binding.etFirstName.setText("");\par
+                binding.etLastName.setText("");\par
+                binding.etEmail.setText("");\par
+                Toast.makeText(this, "\f2\'d0\f0\lang1033\'e3 th\'eam sinh vi\'ean", Toast.LENGTH_SHORT).show();\par
+            \} else \{\par
+                Toast.makeText(this, "Vui l\'f2ng nh\f1\lang1066\u7853?p \f2\'f0\f1\u7847?y \f2\'f0\f1\u7911? th\f0\lang1033\'f4ng tin", Toast.LENGTH_SHORT).show();\par
+            \}\par
+        \});\par
+\par
+        adapter.setOnStudentActionListener(new StudentAdapter.OnStudentActionListener() \{\par
+            @Override\par
+            public void onDelete(Student student) \{\par
+                viewModel.deleteStudent(student);\par
+                Toast.makeText(MainActivity.this, "\f2\'d0\f0\'e3 x\'f3a sinh vi\'ean", Toast.LENGTH_SHORT).show();\par
+            \}\par
+\par
+            @Override\par
+            public void onEdit(Student student) \{\par
+                String newEmail = binding.etEmail.getText().toString().trim();\par
+                if (!newEmail.isEmpty()) \{\par
+                    viewModel.updateStudent(student, newEmail);\par
+                    binding.etEmail.setText("");\par
+                    Toast.makeText(MainActivity.this, "\f2\'d0\f0\'e3 s\f1\lang1066\u7917?a email", Toast.LENGTH_SHORT).show();\par
+                \} else \{\par
+                    Toast.makeText(MainActivity.this, "Vui l\f0\lang1033\'f2ng nh\f1\lang1066\u7853?p email m\u7899?i", Toast.LENGTH_SHORT).show();\par
+                \}\par
+            \}\par
+        \});\par
+    \}\par
+\}\par
+Lu\u7891?ng d\u7919? li\u7879?u\par
+MainActivity: Kh\u7903?i t\u7841?o StudentViewModel v\u7899?i context.\par
+StudentViewModel: Kh\u7903?i t\u7841?o StudentRepository, g\u7885?i loadStudents().\par
+StudentRepository:\par
+AsyncTask ki\u7875?m tra Room (getStudentCount()).\par
+N\u7871?u Room c\f0\lang1033\'f3 d\f1\lang1066\u7919? li\u7879?u, l\u7845?y t\u7915? studentDao.getAllStudents().\par
+N\u7871?u Room r\u7895?ng, g\u7885?i API; n\u7871?u API th\f0\lang1033\'e0nh c\'f4ng, l\f2\u432?u v\f0\'e0o Room; n\f1\lang1066\u7871?u API th\u7845?t b\u7841?i, l\u7845?y t\u7915? DAO gi\u7843? l\u7853?p v\f0\lang1033\'e0 l\f2\u432?u v\f0\'e0o Room.\par
+StudentViewModel:\par
+Quan s\'e1t studentList, ch\f1\lang1066\u7901? 2 gi\f0\lang1033\'e2y, c\f1\lang1066\u7853?p nh\u7853?t UI.\par
+X\u7917? l\f0\lang1033\'fd th\'eam, x\'f3a, s\f1\lang1066\u7917?a, s\u7855?p x\u7871?p theo first_name + last_name.\par
+MainActivity:\par
+Hi\u7875?n th\u7883? ProgressBar khi isLoading = true.\par
+C\u7853?p nh\u7853?t RecyclerView v\u7899?i danh s\f0\lang1033\'e1ch sinh vi\'ean.\par
+X\f1\lang1066\u7917? l\f0\lang1033\'fd l\f1\lang1066\u7895?i\par
+V\u7845?n \f2\'f0\f1\u7873?: L\u7895?i bi\f0\lang1033\'ean d\f1\lang1066\u7883?ch do c\f0\lang1033\'fa ph\'e1p Coroutines trong Java.\par
+Gi\f1\lang1066\u7843?i ph\f0\lang1033\'e1p:\par
+Thay Coroutines b\f1\lang1066\u7857?ng AsyncTask \f2\'f0\f1\u7875? x\u7917? l\f0\lang1033\'fd Room b\f1\lang1066\u7845?t \f2\'f0\f1\u7891?ng b\u7897?.\par
+Kh\u7903?i t\u7841?o studentList v\u7899?i danh s\f0\lang1033\'e1ch r\f1\lang1066\u7895?ng, ki\u7875?m tra null \u7903? m\u7885?i b\f2\u432?\f1\u7899?c.\par
+Debug: Th\f0\lang1033\'eam log:\par
+java\par
+\par
+Collapse\par
+\par
+Wrap\par
+\par
+Copy\par
+Log.d("StudentRepository", "Room has " + studentDao.getStudentCount() + " students");\par
+K\f1\lang1066\u7871?t qu\u7843?\par
+API th\f0\lang1033\'e0nh c\'f4ng: L\f2\u432?u 6 sinh vi\f0\'ean v\'e0o Room, hi\f1\lang1066\u7875?n th\u7883? t\u7915? Room.\par
+API th\u7845?t b\u7841?i: L\f2\u432?u 2 sinh vi\f0\lang1033\'ean t\f1\lang1066\u7915? DAO v\f0\lang1033\'e0o Room, hi\f1\lang1066\u7875?n th\u7883? t\u7915? Room.\par
+Room c\f0\lang1033\'f3 d\f1\lang1066\u7919? li\u7879?u: Hi\u7875?n th\u7883? danh s\f0\lang1033\'e1ch t\f1\lang1066\u7915? Room khi m\u7903? \u7913?ng d\u7909?ng.\par
+S\u7855?p x\u7871?p: Nh\u7845?n n\f0\lang1033\'fat "S\f1\lang1066\u7855?p x\u7871?p", danh s\f0\lang1033\'e1ch s\f1\lang1066\u7855?p x\u7871?p theo first_name + last_name.\par
+Th\f0\lang1033\'eam/X\'f3a/S\f1\lang1066\u7917?a: C\u7853?p nh\u7853?t Room v\f0\lang1033\'e0 UI, hi\f1\lang1066\u7875?n th\u7883? Toast.\par
+Ch\u7909?p m\f0\lang1033\'e0n h\'ecnh: Giao di\f1\lang1066\u7879?n v\u7899?i danh s\f0\lang1033\'e1ch, sau khi s\f1\lang1066\u7855?p x\u7871?p, th\f0\lang1033\'eam/x\'f3a/s\f1\lang1066\u7917?a.\par
+L\f2\u432?u \f0\lang1033\'fd \'f4n t\f1\lang1066\u7853?p\par
+AsyncTask: Ch\u7841?y Room tr\f0\lang1033\'ean background thread (doInBackground), c\f1\lang1066\u7853?p nh\u7853?t UI trong onPostExecute.\par
+API v\f0\lang1033\'e0 DAO: Ki\f1\lang1066\u7875?m tra Room tr\f2\u432?\f1\u7899?c, g\u7885?i API n\u7871?u r\u7895?ng, l\u7845?y t\u7915? DAO gi\u7843? l\u7853?p n\u7871?u API th\u7845?t b\u7841?i.\par
+Room: S\u7917? d\u7909?ng @Entity, @Dao, @Database \f2\'f0\f1\u7875? l\f2\u432?u tr\f1\u7919? v\f0\lang1033\'e0 qu\f1\lang1066\u7843?n l\f0\lang1033\'fd d\f1\lang1066\u7919? li\u7879?u.\par
+S\u7855?p x\u7871?p: S\u7917? d\u7909?ng Collections.sort trong ViewModel.\par
+LiveData: T\u7921? \f2\'f0\f1\u7897?ng c\u7853?p nh\u7853?t UI khi d\u7919? li\u7879?u thay \f2\'f0\f1\u7893?i.\par
+X\u7917? l\f0\lang1033\'fd null: Kh\f1\lang1066\u7903?i t\u7841?o danh s\f0\lang1033\'e1ch r\f1\lang1066\u7895?ng, ki\u7875?m tra null \u7903? m\u7885?i b\f2\u432?\f1\u7899?c.\par
+B\u7841?n c\f0\lang1033\'f3 th\f1\lang1066\u7875? sao ch\f0\lang1033\'e9p n\f1\lang1066\u7897?i dung n\f0\lang1033\'e0y v\'e0o t\'e0i li\f1\lang1066\u7879?u \f0\lang1033\'f4n t\f1\lang1066\u7853?p. N\u7871?u c\u7847?n h\u7895? tr\u7907? debug ho\u7863?c th\f0\lang1033\'eam chi ti\f1\lang1066\u7871?t, h\f0\lang1033\'e3y cung c\f1\lang1066\u7845?p logcat ho\u7863?c y\f0\lang1033\'eau c\f1\lang1066\u7847?u c\u7909? th\u7875?! Ch\f0\lang1033\'fac b\f1\lang1066\u7841?n ho\f0\lang1033\'e0n th\'e0nh t\f1\lang1066\u7889?t!\f0\lang9\par
+}
+ 
