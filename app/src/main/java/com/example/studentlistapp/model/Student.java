@@ -1,14 +1,17 @@
 package com.example.studentlistapp.model;
 
-// Class Student đại diện cho một sinh viên
-public class Student {
-    private int id; // ID của sinh viên
-    private String email; // Email
-    private String first_name; // Tên
-    private String last_name; // Họ
-    private String avatar; // URL ảnh đại diện
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
-    // Constructor
+@Entity(tableName = "students")
+public class Student {
+    @PrimaryKey
+    private int id;
+    private String email;
+    private String first_name;
+    private String last_name;
+    private String avatar;
+
     public Student(int id, String email, String first_name, String last_name, String avatar) {
         this.id = id;
         this.email = email;
@@ -17,10 +20,15 @@ public class Student {
         this.avatar = avatar;
     }
 
-    // Getter để lấy dữ liệu
+    // Getter và Setter
     public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
     public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
     public String getFirst_name() { return first_name; }
+    public void setFirst_name(String first_name) { this.first_name = first_name; }
     public String getLast_name() { return last_name; }
+    public void setLast_name(String last_name) { this.last_name = last_name; }
     public String getAvatar() { return avatar; }
+    public void setAvatar(String avatar) { this.avatar = avatar; }
 }

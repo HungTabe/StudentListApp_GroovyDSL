@@ -1,18 +1,31 @@
 package com.example.studentlistapp.data;
 
+import androidx.room.Dao;
+import androidx.room.Delete;
+import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
+import androidx.room.Query;
+import androidx.room.Update;
 import com.example.studentlistapp.model.Student;
-
-import java.util.ArrayList;
 import java.util.List;
 
-// Class DAO giả lập để trả về danh sách sinh viên
-public class StudentDao {
-    // Hàm trả về danh sách sinh viên mẫu
-    public List<Student> getStudents() {
-        List<Student> students = new ArrayList<>();
-        // Dữ liệu giả lập (sẽ được thay bằng API trong Repository)
-        students.add(new Student(1, "george.bluth@reqres.in", "George", "Bluth", "https://reqres.in/img/faces/1-image.jpg"));
-        students.add(new Student(2, "janet.weaver@reqres.in", "Janet", "Weaver", "https://reqres.in/img/faces/2-image.jpg"));
-        return students;
-    }
+@Dao
+public interface StudentDao {
+    @Query("SELECT * FROM students")
+    List<Student> getAllStudents();
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    void insert(List<Student> students);
+
+    @Insert
+    void insertStudent(Student student);
+
+    @Delete
+    void delete(Student student);
+
+    @Update
+    void update(Student student);
+
+    @Query("SELECT COUNT(*) FROM students")
+    int getStudentCount();
 }
