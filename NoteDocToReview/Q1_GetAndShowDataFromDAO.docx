@@ -1,0 +1,428 @@
+{\rtf1\ansi\deff0\nouicompat{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset163 Calibri;}{\f2\fnil\fcharset238 Calibri;}}
+{\colortbl ;\red0\green0\blue255;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs24\lang9 H\'e3y t\f1\lang1066\u7893?ng h\u7907?p idea v\f0\lang1033\'e0 c\'e1ch tri\f1\lang1066\u7875?n khai l\u7845?y d\u7919? li\u7879?u t\u7915? dao b\u7841?n v\u7915?a m\u7899?i tr\f0\lang1033\'ecnh b\'e0y \f1\lang1066\u7903? tr\f0\lang1033\'ean gi\'fap t\'f4i \f2\'f0\f1\lang1066\u7875? t\f0\lang1033\'f4i c\'f3 th\f1\lang1066\u7875? vi\u7871?t t\f0\lang1033\'e0i li\f1\lang1066\u7879?u l\u7841?i sau n\f0\lang1033\'e0y c\'f3 th\f1\lang1066\u7875? \f0\lang1033\'f4n t\f1\lang1066\u7853?p\par
+\par
+\par
+D\f2\u432?\f1\u7899?i \f2\'f0\f0\lang1033\'e2y l\'e0 t\f1\lang1066\u7893?ng h\u7907?p idea v\f0\lang1033\'e0 c\'e1ch tri\f1\lang1066\u7875?n khai l\u7845?y d\u7919? li\u7879?u t\u7915? DAO gi\u7843? l\u7853?p trong \u7913?ng d\u7909?ng Android c\u7911?a b\u7841?n, d\u7921?a tr\f0\lang1033\'ean h\f2\u432?\f1\lang1066\u7899?ng d\u7851?n \f2\'f0\f0\lang1033\'e3 cung c\f1\lang1066\u7845?p. N\u7897?i dung \f2\'f0\u432?\f1\u7907?c tr\f0\lang1033\'ecnh b\'e0y ng\f1\lang1066\u7855?n g\u7885?n, r\f0\lang1033\'f5 r\'e0ng, d\f1\lang1066\u7877? hi\u7875?u \f2\'f0\f1\u7875? b\u7841?n c\f0\lang1033\'f3 th\f1\lang1066\u7875? s\u7917? d\u7909?ng l\f0\lang1033\'e0m t\'e0i li\f1\lang1066\u7879?u \f0\lang1033\'f4n t\f1\lang1066\u7853?p sau n\f0\lang1033\'e0y. T\'f4i s\f1\lang1066\u7869? t\u7853?p trung v\f0\lang1033\'e0o vi\f1\lang1066\u7879?c l\u7845?y d\u7919? li\u7879?u t\u7915? StudentDao trong ki\u7871?n tr\f0\lang1033\'fac MVVM, bao g\f1\lang1066\u7891?m c\f0\lang1033\'e1c b\f2\u432?\f1\lang1066\u7899?c tri\u7875?n khai v\f0\lang1033\'e0 gi\f1\lang1066\u7843?i th\f0\lang1033\'edch \'fd t\f2\u432?\f1\lang1066\u7903?ng.\par
+\par
+Idea ch\f0\lang1033\'ednh\par
+M\f1\lang1066\u7909?c ti\f0\lang1033\'eau: L\f1\lang1066\u7845?y danh s\f0\lang1033\'e1ch sinh vi\'ean t\f1\lang1066\u7915? m\u7897?t DAO gi\u7843? l\u7853?p (StudentDao) \f2\'f0\f1\u7875? hi\u7875?n th\u7883? trong \u7913?ng d\u7909?ng Android, thay v\f0\lang1033\'ec g\f1\lang1066\u7885?i API th\u7853?t ({{\field{\*\fldinst{HYPERLINK https://reqres.in/api/users?page=1 }}{\fldrslt{https://reqres.in/api/users?page=1\ul0\cf0}}}}\f1\fs24 ). \f2\'d0i\f1\u7873?u n\f0\lang1033\'e0y gi\'fap ki\f1\lang1066\u7875?m tra logic \u7913?ng d\u7909?ng m\f0\lang1033\'e0 kh\'f4ng ph\f1\lang1066\u7909? thu\u7897?c v\f0\lang1033\'e0o m\f1\lang1066\u7841?ng.\par
+\f0\lang1033\'dd t\f2\u432?\f1\lang1066\u7903?ng:\par
+DAO gi\u7843? l\u7853?p (StudentDao) l\f0\lang1033\'e0 m\f1\lang1066\u7897?t l\u7899?p cung c\u7845?p d\u7919? li\u7879?u m\u7851?u (hard-coded), m\f0\lang1033\'f4 ph\f1\lang1066\u7887?ng d\u7919? li\u7879?u t\u7915? c\f2\u417? s\f1\u7903? d\u7919? li\u7879?u ho\u7863?c API.\par
+Repository (StudentRepository) \f2\'f0\f0\lang1033\'f3ng vai tr\'f2 trung gian, l\f1\lang1066\u7845?y d\u7919? li\u7879?u t\u7915? StudentDao v\f0\lang1033\'e0 cung c\f1\lang1066\u7845?p cho ViewModel th\f0\lang1033\'f4ng qua LiveData.\par
+ViewModel (StudentViewModel) qu\f1\lang1066\u7843?n l\f0\lang1033\'fd d\f1\lang1066\u7919? li\u7879?u, \f2\'f0\f1\u7843?m b\u7843?o kh\f0\lang1033\'f4ng tr\f1\lang1066\u7843? v\u7873? null, v\f0\lang1033\'e0 th\'f4ng b\'e1o thay \f2\'f0\f1\lang1066\u7893?i cho giao di\u7879?n qua LiveData.\par
+MainActivity quan s\f0\lang1033\'e1t LiveData t\f1\lang1066\u7915? ViewModel \f2\'f0\f1\u7875? c\u7853?p nh\u7853?t danh s\f0\lang1033\'e1ch sinh vi\'ean trong RecyclerView v\'e0 hi\f1\lang1066\u7875?n th\u7883? tr\u7841?ng th\f0\lang1033\'e1i loading.\par
+Ki\f1\lang1066\u7871?n tr\f0\lang1033\'fac MVVM:\par
+Model: Student (\f2\'f0\f1\lang1066\u7883?nh ngh\f2\u297?a d\f1\u7919? li\u7879?u sinh vi\f0\lang1033\'ean) v\'e0 StudentDao (cung c\f1\lang1066\u7845?p d\u7919? li\u7879?u).\par
+View: MainActivity v\f0\lang1033\'e0 RecyclerView (hi\f1\lang1066\u7875?n th\u7883? giao di\u7879?n).\par
+ViewModel: StudentViewModel (qu\u7843?n l\f0\lang1033\'fd d\f1\lang1066\u7919? li\u7879?u v\f0\lang1033\'e0 logic).\par
+Repository: StudentRepository (trung gian gi\f1\lang1066\u7919?a DAO v\f0\lang1033\'e0 ViewModel).\par
+Y\'eau c\f1\lang1066\u7847?u \f2\'f0\f1\u7863?c bi\u7879?t:\par
+S\u7917? d\u7909?ng LiveData \f2\'f0\f1\u7875? t\u7921? \f2\'f0\f1\u7897?ng c\u7853?p nh\u7853?t giao di\u7879?n khi d\u7919? li\u7879?u thay \f2\'f0\f1\u7893?i.\par
+Hi\u7875?n th\u7883? tr\u7841?ng th\f0\lang1033\'e1i loading (ProgressBar) trong 2 gi\'e2y khi t\f1\lang1066\u7843?i d\u7919? li\u7879?u.\par
+\f2\'d0\f1\u7843?m b\u7843?o kh\f0\lang1033\'f4ng x\f1\lang1066\u7843?y ra l\u7895?i NullPointerException b\u7857?ng c\f0\lang1033\'e1ch kh\f1\lang1066\u7903?i t\u7841?o danh s\f0\lang1033\'e1ch r\f1\lang1066\u7895?ng v\f0\lang1033\'e0 ki\f1\lang1066\u7875?m tra null.\par
+C\f0\lang1033\'e1ch tri\f1\lang1066\u7875?n khai\par
+1. T\u7841?o Model Student\par
+M\u7909?c \f2\'f0\f0\lang1033\'edch: \f2\'d0\f1\lang1066\u7883?nh ngh\f2\u297?a c\f1\u7845?u tr\f0\lang1033\'fac d\f1\lang1066\u7919? li\u7879?u cho m\u7897?t sinh vi\f0\lang1033\'ean, kh\f1\lang1066\u7899?p v\u7899?i d\u7919? li\u7879?u t\u7915? API ho\u7863?c DAO.\par
+File: app/src/main/java/com/example/studentlistapp/model/Student.java\par
+Code:\par
+package com.example.studentlistapp.model;\par
+\par
+public class Student \{\par
+    private int id;\par
+    private String email;\par
+    private String first_name;\par
+    private String last_name;\par
+    private String avatar;\par
+\par
+    public Student(int id, String email, String first_name, String last_name, String avatar) \{\par
+        this.id = id;\par
+        this.email = email;\par
+        this.first_name = first_name;\par
+        this.last_name = last_name;\par
+        this.avatar = avatar;\par
+    \}\par
+\par
+    public int getId() \{ return id; \}\par
+    public String getEmail() \{ return email; \}\par
+    public String getFirst_name() \{ return first_name; \}\par
+    public String getLast_name() \{ return last_name; \}\par
+    public String getAvatar() \{ return avatar; \}\par
+\}\par
+\f0\lang1033\'dd t\f2\u432?\f1\lang1066\u7903?ng:\par
+Student c\f0\lang1033\'f3 5 thu\f1\lang1066\u7897?c t\f0\lang1033\'ednh (id, email, first_name, last_name, avatar), kh\f1\lang1066\u7899?p v\u7899?i c\u7845?u tr\f0\lang1033\'fac JSON t\f1\lang1066\u7915? API.\par
+Getter gi\f0\lang1033\'fap truy c\f1\lang1066\u7853?p d\u7919? li\u7879?u \f2\'f0\f1\u7875? hi\u7875?n th\u7883? tr\f0\lang1033\'ean giao di\f1\lang1066\u7879?n ho\u7863?c x\u7917? l\f0\lang1033\'fd logic.\par
+2. T\f1\lang1066\u7841?o DAO gi\u7843? l\u7853?p StudentDao\par
+M\u7909?c \f2\'f0\f0\lang1033\'edch: Cung c\f1\lang1066\u7845?p danh s\f0\lang1033\'e1ch sinh vi\'ean m\f1\lang1066\u7851?u (hard-coded) \f2\'f0\f1\u7875? m\f0\lang1033\'f4 ph\f1\lang1066\u7887?ng d\u7919? li\u7879?u t\u7915? c\f2\u417? s\f1\u7903? d\u7919? li\u7879?u.\par
+File: app/src/main/java/com/example/studentlistapp/data/StudentDao.java\par
+Code:\par
+package com.example.studentlistapp.data;\par
+\par
+import com.example.studentlistapp.model.Student;\par
+import java.util.ArrayList;\par
+import java.util.List;\par
+\par
+public class StudentDao \{\par
+    public List<Student> getStudents() \{\par
+        List<Student> students = new ArrayList<>();\par
+        students.add(new Student(1, "george.bluth@reqres.in", "George", "Bluth", "{{\field{\*\fldinst{HYPERLINK https://reqres.in/img/faces/1-image.jpg }}{\fldrslt{https://reqres.in/img/faces/1-image.jpg\ul0\cf0}}}}\f1\fs24 "));\par
+        students.add(new Student(2, "janet.weaver@reqres.in", "Janet", "Weaver", "{{\field{\*\fldinst{HYPERLINK https://reqres.in/img/faces/2-image.jpg }}{\fldrslt{https://reqres.in/img/faces/2-image.jpg\ul0\cf0}}}}\f1\fs24 "));\par
+        return students;\par
+    \}\par
+\}\par
+\f0\lang1033\'dd t\f2\u432?\f1\lang1066\u7903?ng:\par
+StudentDao tr\u7843? v\u7873? danh s\f0\lang1033\'e1ch 2 sinh vi\'ean m\f1\lang1066\u7851?u, m\f0\lang1033\'f4 ph\f1\lang1066\u7887?ng d\u7919? li\u7879?u t\u7915? API.\par
+D\u7919? li\u7879?u \f2\'f0\u432?\f1\u7907?c t\u7841?o s\u7861?n trong code, kh\f0\lang1033\'f4ng ph\f1\lang1066\u7909? thu\u7897?c v\f0\lang1033\'e0o m\f1\lang1066\u7841?ng hay c\f2\u417? s\f1\u7903? d\u7919? li\u7879?u th\u7853?t.\par
+Danh s\f0\lang1033\'e1ch tr\f1\lang1066\u7843? v\u7873? l\f0\lang1033\'e0 m\f1\lang1066\u7897?t ArrayList<Student>, kh\f0\lang1033\'f4ng bao gi\f1\lang1066\u7901? null.\par
+3. T\u7841?o Repository StudentRepository\par
+M\u7909?c \f2\'f0\f0\lang1033\'edch: L\f1\lang1066\u7845?y d\u7919? li\u7879?u t\u7915? StudentDao v\f0\lang1033\'e0 cung c\f1\lang1066\u7845?p cho ViewModel qua LiveData.\par
+File: app/src/main/java/com/example/studentlistapp/repository/StudentRepository.java\par
+Code:\par
+package com.example.studentlistapp.repository;\par
+\par
+import androidx.lifecycle.MutableLiveData;\par
+import com.example.studentlistapp.data.StudentDao;\par
+import com.example.studentlistapp.model.Student;\par
+import java.util.ArrayList;\par
+import java.util.List;\par
+\par
+public class StudentRepository \{\par
+    private StudentDao studentDao;\par
+    private MutableLiveData<List<Student>> studentList;\par
+\par
+    public StudentRepository() \{\par
+        studentDao = new StudentDao(); // Kh\u7903?i t\u7841?o DAO\par
+        studentList = new MutableLiveData<>(new ArrayList<>()); // Kh\u7903?i t\u7841?o danh s\f0\lang1033\'e1ch r\f1\lang1066\u7895?ng\par
+    \}\par
+\par
+    public MutableLiveData<List<Student>> getStudents() \{\par
+        studentList.setValue(studentDao.getStudents()); // L\u7845?y d\u7919? li\u7879?u t\u7915? DAO\par
+        return studentList;\par
+    \}\par
+\}\par
+\f0\lang1033\'dd t\f2\u432?\f1\lang1066\u7903?ng:\par
+Kh\u7903?i t\u7841?o:\par
+studentDao = new StudentDao() \f2\'f0\f1\u7875? \f2\'f0\f1\u7843?m b\u7843?o DAO kh\f0\lang1033\'f4ng null.\par
+studentList l\'e0 MutableLiveData kh\f1\lang1066\u7903?i t\u7841?o v\u7899?i danh s\f0\lang1033\'e1ch r\f1\lang1066\u7895?ng \f2\'f0\f1\u7875? tr\f0\lang1033\'e1nh l\f1\lang1066\u7895?i null.\par
+getStudents(): G\u7885?i studentDao.getStudents() \f2\'f0\f1\u7875? l\u7845?y danh s\f0\lang1033\'e1ch sinh vi\'ean v\'e0 c\f1\lang1066\u7853?p nh\u7853?t v\f0\lang1033\'e0o studentList.\par
+LiveData: Cho ph\'e9p ViewModel quan s\'e1t v\'e0 nh\f1\lang1066\u7853?n d\u7919? li\u7879?u ngay khi \f2\'f0\u432?\f1\u7907?c c\u7853?p nh\u7853?t.\par
+4. T\u7841?o ViewModel StudentViewModel\par
+M\u7909?c \f2\'f0\f0\lang1033\'edch: Qu\f1\lang1066\u7843?n l\f0\lang1033\'fd d\f1\lang1066\u7919? li\u7879?u t\u7915? Repository, cung c\u7845?p danh s\f0\lang1033\'e1ch sinh vi\'ean v\'e0 tr\f1\lang1066\u7841?ng th\f0\lang1033\'e1i loading qua LiveData.\par
+File: app/src/main/java/com/example/studentlistapp/viewmodel/StudentViewModel.java\par
+Code:\par
+java\par
+\par
+Collapse\par
+\par
+Wrap\par
+\par
+Copy\par
+package com.example.studentlistapp.viewmodel;\par
+\par
+import androidx.lifecycle.LiveData;\par
+import androidx.lifecycle.MutableLiveData;\par
+import androidx.lifecycle.ViewModel;\par
+import com.example.studentlistapp.model.Student;\par
+import com.example.studentlistapp.repository.StudentRepository;\par
+import java.util.ArrayList;\par
+import java.util.List;\par
+\par
+public class StudentViewModel extends ViewModel \{\par
+    private StudentRepository repository;\par
+    private MutableLiveData<List<Student>> studentList;\par
+    private MutableLiveData<Boolean> isLoading;\par
+\par
+    public StudentViewModel() \{\par
+        repository = new StudentRepository();\par
+        studentList = new MutableLiveData<>(new ArrayList<>());\par
+        isLoading = new MutableLiveData<>(false);\par
+        loadStudents();\par
+    \}\par
+\par
+    public LiveData<List<Student>> getStudentList() \{\par
+        return studentList;\par
+    \}\par
+\par
+    public LiveData<Boolean> getIsLoading() \{\par
+        return isLoading;\par
+    \}\par
+\par
+    private void loadStudents() \{\par
+        isLoading.setValue(true);\par
+        new android.os.Handler().postDelayed(() -> \{\par
+            List<Student> students = repository.getStudents().getValue();\par
+            studentList.setValue(students != null ? students : new ArrayList<>());\par
+            isLoading.setValue(false);\par
+        \}, 2000);\par
+    \}\par
+\}\par
+\'dd t\f2\u432?\f1\lang1066\u7903?ng:\par
+Kh\u7903?i t\u7841?o:\par
+repository = new StudentRepository() \f2\'f0\f1\u7875? l\u7845?y d\u7919? li\u7879?u.\par
+studentList kh\u7903?i t\u7841?o v\u7899?i danh s\f0\lang1033\'e1ch r\f1\lang1066\u7895?ng.\par
+isLoading kh\u7903?i t\u7841?o l\f0\lang1033\'e0 false \f2\'f0\f1\lang1066\u7875? qu\u7843?n l\f0\lang1033\'fd ProgressBar.\par
+loadStudents():\par
+B\f1\lang1066\u7853?t isLoading (true) \f2\'f0\f1\u7875? hi\u7875?n th\u7883? ProgressBar.\par
+Gi\u7843? l\u7853?p th\u7901?i gian t\u7843?i 2 gi\f0\lang1033\'e2y b\f1\lang1066\u7857?ng Handler.\par
+L\u7845?y d\u7919? li\u7879?u t\u7915? repository.getStudents() v\f0\lang1033\'e0 c\f1\lang1066\u7853?p nh\u7853?t studentList.\par
+Ki\u7875?m tra null \f2\'f0\f1\u7875? g\f0\lang1033\'e1n danh s\'e1ch r\f1\lang1066\u7895?ng n\u7871?u c\u7847?n.\par
+LiveData:\par
+getStudentList() tr\u7843? v\u7873? studentList \f2\'f0\f1\u7875? MainActivity quan s\f0\lang1033\'e1t danh s\'e1ch sinh vi\'ean.\par
+getIsLoading() tr\f1\lang1066\u7843? v\u7873? isLoading \f2\'f0\f1\u7875? \f2\'f0i\f1\u7873?u khi\u7875?n ProgressBar.\par
+5. T\u7841?o MainActivity v\f0\lang1033\'e0 RecyclerView\par
+M\f1\lang1066\u7909?c \f2\'f0\f0\lang1033\'edch: Hi\f1\lang1066\u7875?n th\u7883? danh s\f0\lang1033\'e1ch sinh vi\'ean trong RecyclerView v\'e0 tr\f1\lang1066\u7841?ng th\f0\lang1033\'e1i loading b\f1\lang1066\u7857?ng ProgressBar.\par
+File:\par
+Layout: app/src/main/res/layout/activity_main.xml\par
+xml\par
+\par
+Collapse\par
+\par
+Wrap\par
+\par
+Copy\par
+<?xml version="1.0" encoding="utf-8"?>\par
+<androidx.constraintlayout.widget.ConstraintLayout\par
+    xmlns:android="http://schemas.android.com/apk/res/android"\par
+    xmlns:app="http://schemas.android.com/apk/res-auto"\par
+    android:layout_width="match_parent"\par
+    android:layout_height="match_parent">\par
+\par
+    <ProgressBar\par
+        android:id="@+id/progressBar"\par
+        android:layout_width="wrap_content"\par
+        android:layout_height="wrap_content"\par
+        android:visibility="gone"\par
+        app:layout_constraintBottom_toBottomOf="parent"\par
+        app:layout_constraintEnd_toEndOf="parent"\par
+        app:layout_constraintStart_toStartOf="parent"\par
+        app:layout_constraintTop_toTopOf="parent" />\par
+\par
+    <androidx.recyclerview.widget.RecyclerView\par
+        android:id="@+id/recyclerView"\par
+        android:layout_width="match_parent"\par
+        android:layout_height="match_parent"\par
+        app:layout_constraintBottom_toBottomOf="parent"\par
+        app:layout_constraintEnd_toEndOf="parent"\par
+        app:layout_constraintStart_toStartOf="parent"\par
+        app:layout_constraintTop_toTopOf="parent" />\par
+\par
+</androidx.constraintlayout.widget.ConstraintLayout>\par
+Item Layout: app/src/main/res/layout/item_student.xml\par
+xml\par
+\par
+Collapse\par
+\par
+Wrap\par
+\par
+Copy\par
+<?xml version="1.0" encoding="utf-8"?>\par
+<androidx.constraintlayout.widget.ConstraintLayout\par
+    xmlns:android="http://schemas.android.com/apk/res/android"\par
+    xmlns:app="http://schemas.android.com/apk/res-auto"\par
+    android:layout_width="match_parent"\par
+    android:layout_height="wrap_content"\par
+    android:padding="8dp">\par
+\par
+    <ImageView\par
+        android:id="@+id/avatar"\par
+        android:layout_width="50dp"\par
+        android:layout_height="50dp"\par
+        app:layout_constraintStart_toStartOf="parent"\par
+        app:layout_constraintTop_toTopOf="parent" />\par
+\par
+    <TextView\par
+        android:id="@+id/tvName"\par
+        android:layout_width="0dp"\par
+        android:layout_height="wrap_content"\par
+        android:layout_marginStart="8dp"\par
+        android:textSize="16sp"\par
+        app:layout_constraintEnd_toEndOf="parent"\par
+        app:layout_constraintStart_toEndOf="@id/avatar"\par
+        app:layout_constraintTop_toTopOf="parent" />\par
+\par
+    <TextView\par
+        android:id="@+id/tvEmail"\par
+        android:layout_width="0dp"\par
+        android:layout_height="wrap_content"\par
+        android:layout_marginStart="8dp"\par
+        android:textSize="14sp"\par
+        app:layout_constraintEnd_toEndOf="parent"\par
+        app:layout_constraintStart_toEndOf="@id/avatar"\par
+        app:layout_constraintTop_toBottomOf="@id/tvName" />\par
+\par
+</androidx.constraintlayout.widget.ConstraintLayout>\par
+Adapter: app/src/main/java/com/example/studentlistapp/adapter/StudentAdapter.java\par
+java\par
+\par
+Collapse\par
+\par
+Wrap\par
+\par
+Copy\par
+package com.example.studentlistapp.adapter;\par
+\par
+import android.view.LayoutInflater;\par
+import android.view.View;\par
+import android.view.ViewGroup;\par
+import android.widget.ImageView;\par
+import android.widget.TextView;\par
+import androidx.annotation.NonNull;\par
+import androidx.recyclerview.widget.RecyclerView;\par
+import com.bumptech.glide.Glide;\par
+import com.example.studentlistapp.R;\par
+import com.example.studentlistapp.model.Student;\par
+import java.util.ArrayList;\par
+import java.util.List;\par
+\par
+public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentViewHolder> \{\par
+    private List<Student> students = new ArrayList<>();\par
+\par
+    public void setStudents(List<Student> students) \{\par
+        this.students = students != null ? students : new ArrayList<>();\par
+        notifyDataSetChanged();\par
+    \}\par
+\par
+    @NonNull\par
+    @Override\par
+    public StudentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) \{\par
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_student, parent, false);\par
+        return new StudentViewHolder(view);\par
+    \}\par
+\par
+    @Override\par
+    public void onBindViewHolder(@NonNull StudentViewHolder holder, int position) \{\par
+        Student student = students.get(position);\par
+        holder.tvName.setText(student.getFirst_name() + " " + student.getLast_name());\par
+        holder.tvEmail.setText(student.getEmail());\par
+        Glide.with(holder.itemView.getContext()).load(student.getAvatar()).into(holder.avatar);\par
+    \}\par
+\par
+    @Override\par
+    public int getItemCount() \{\par
+        return students.size();\par
+    \}\par
+\par
+    static class StudentViewHolder extends RecyclerView.ViewHolder \{\par
+        ImageView avatar;\par
+        TextView tvName, tvEmail;\par
+\par
+        public StudentViewHolder(@NonNull View itemView) \{\par
+            super(itemView);\par
+            avatar = itemView.findViewById(R.id.avatar);\par
+            tvName = itemView.findViewById(R.id.tvName);\par
+            tvEmail = itemView.findViewById(R.id.tvEmail);\par
+        \}\par
+    \}\par
+\}\par
+MainActivity: app/src/main/java/com/example/studentlistapp/MainActivity.java\par
+java\par
+\par
+Collapse\par
+\par
+Wrap\par
+\par
+Copy\par
+package com.example.studentlistapp;\par
+\par
+import android.os.Bundle;\par
+import android.view.View;\par
+import androidx.appcompat.app.AppCompatActivity;\par
+import androidx.lifecycle.ViewModelProvider;\par
+import androidx.recyclerview.widget.LinearLayoutManager;\par
+import com.example.studentlistapp.adapter.StudentAdapter;\par
+import com.example.studentlistapp.databinding.ActivityMainBinding;\par
+import com.example.studentlistapp.viewmodel.StudentViewModel;\par
+\par
+public class MainActivity extends AppCompatActivity \{\par
+    private ActivityMainBinding binding;\par
+    private StudentViewModel viewModel;\par
+    private StudentAdapter adapter;\par
+\par
+    @Override\par
+    protected void onCreate(Bundle savedInstanceState) \{\par
+        super.onCreate(savedInstanceState);\par
+        binding = ActivityMainBinding.inflate(getLayoutInflater());\par
+        setContentView(binding.getRoot());\par
+\par
+        adapter = new StudentAdapter();\par
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));\par
+        binding.recyclerView.setAdapter(adapter);\par
+\par
+        viewModel = new ViewModelProvider(this).get(StudentViewModel.class);\par
+\par
+        viewModel.getStudentList().observe(this, students -> \{\par
+            adapter.setStudents(students);\par
+        \});\par
+\par
+        viewModel.getIsLoading().observe(this, isLoading -> \{\par
+            binding.progressBar.setVisibility(isLoading ? View.VISIBLE : View.GONE);\par
+        \});\par
+    \}\par
+\}\par
+\f0\lang1033\'dd t\f2\u432?\f1\lang1066\u7903?ng:\par
+activity_main.xml: Ch\u7913?a RecyclerView \f2\'f0\f1\u7875? hi\u7875?n th\u7883? danh s\f0\lang1033\'e1ch v\'e0 ProgressBar cho tr\f1\lang1066\u7841?ng th\f0\lang1033\'e1i loading.\par
+item_student.xml: Hi\f1\lang1066\u7875?n th\u7883? \u7843?nh, t\f0\lang1033\'ean, email cho m\f1\lang1066\u7895?i sinh vi\f0\lang1033\'ean.\par
+StudentAdapter:\par
+Nh\f1\lang1066\u7853?n danh s\f0\lang1033\'e1ch sinh vi\'ean t\f1\lang1066\u7915? ViewModel.\par
+Ki\u7875?m tra null trong setStudents() \f2\'f0\f1\u7875? tr\f0\lang1033\'e1nh l\f1\lang1066\u7895?i.\par
+S\u7917? d\u7909?ng Glide \f2\'f0\f1\u7875? t\u7843?i \u7843?nh t\u7915? URL.\par
+MainActivity:\par
+S\u7917? d\u7909?ng ViewBinding \f2\'f0\f1\u7875? truy c\u7853?p view.\par
+Quan s\f0\lang1033\'e1t studentList t\f1\lang1066\u7915? ViewModel \f2\'f0\f1\u7875? c\u7853?p nh\u7853?t RecyclerView.\par
+Quan s\f0\lang1033\'e1t isLoading \f2\'f0\f1\lang1066\u7875? hi\u7875?n th\u7883?/\u7849?n ProgressBar.\par
+Lu\u7891?ng d\u7919? li\u7879?u\par
+MainActivity kh\u7903?i t\u7841?o StudentViewModel.\par
+StudentViewModel kh\u7903?i t\u7841?o StudentRepository v\f0\lang1033\'e0 g\f1\lang1066\u7885?i loadStudents().\par
+StudentRepository g\u7885?i studentDao.getStudents() \f2\'f0\f1\u7875? l\u7845?y danh s\f0\lang1033\'e1ch 2 sinh vi\'ean m\f1\lang1066\u7851?u.\par
+D\u7919? li\u7879?u \f2\'f0\u432?\f1\u7907?c c\u7853?p nh\u7853?t v\f0\lang1033\'e0o studentList (LiveData) trong StudentRepository.\par
+StudentViewModel nh\f1\lang1066\u7853?n d\u7919? li\u7879?u, ch\u7901? 2 gi\f0\lang1033\'e2y (gi\f1\lang1066\u7843? l\u7853?p loading), r\u7891?i c\u7853?p nh\u7853?t studentList.\par
+MainActivity quan s\f0\lang1033\'e1t studentList v\'e0 truy\f1\lang1066\u7873?n d\u7919? li\u7879?u v\f0\lang1033\'e0o StudentAdapter.\par
+StudentAdapter c\f1\lang1066\u7853?p nh\u7853?t RecyclerView \f2\'f0\f1\u7875? hi\u7875?n th\u7883? danh s\f0\lang1033\'e1ch sinh vi\'ean.\par
+X\f1\lang1066\u7917? l\f0\lang1033\'fd l\f1\lang1066\u7895?i\par
+V\u7845?n \f2\'f0\f1\u7873? g\u7863?p ph\u7843?i: L\u7895?i NullPointerException khi studentDao ch\f2\u432?a \'f0\u432?\f1\u7907?c kh\u7903?i t\u7841?o.\par
+Gi\u7843?i ph\f0\lang1033\'e1p:\par
+Kh\f1\lang1066\u7903?i t\u7841?o studentDao = new StudentDao() trong constructor c\u7911?a StudentRepository.\par
+Kh\u7903?i t\u7841?o studentList v\u7899?i danh s\f0\lang1033\'e1ch r\f1\lang1066\u7895?ng trong StudentRepository v\f0\lang1033\'e0 StudentViewModel.\par
+Ki\f1\lang1066\u7875?m tra null trong StudentAdapter.setStudents() v\f0\lang1033\'e0 StudentViewModel.loadStudents().\par
+K\f1\lang1066\u7871?t qu\u7843?\par
+\u7912?ng d\u7909?ng hi\u7875?n th\u7883? ProgressBar trong 2 gi\f0\lang1033\'e2y.\par
+RecyclerView hi\f1\lang1066\u7875?n th\u7883? 2 sinh vi\f0\lang1033\'ean:\par
+Sinh vi\'ean 1: George Bluth, george.bluth@reqres.in, \f1\lang1066\u7843?nh t\u7915? URL.\par
+Sinh vi\f0\lang1033\'ean 2: Janet Weaver, janet.weaver@reqres.in, \f1\lang1066\u7843?nh t\u7915? URL.\par
+Kh\f0\lang1033\'f4ng x\f1\lang1066\u7843?y ra l\u7895?i NullPointerException.\par
+L\f2\u432?u \f0\lang1033\'fd \'f4n t\f1\lang1066\u7853?p\par
+Ki\u7871?n tr\f0\lang1033\'fac MVVM: T\'e1ch bi\f1\lang1066\u7879?t Model (d\u7919? li\u7879?u), View (giao di\u7879?n), ViewModel (logic).\par
+LiveData: D\f0\lang1033\'f9ng \f2\'f0\f1\lang1066\u7875? t\u7921? \f2\'f0\f1\u7897?ng c\u7853?p nh\u7853?t giao di\u7879?n khi d\u7919? li\u7879?u thay \f2\'f0\f1\u7893?i.\par
+DAO gi\u7843? l\u7853?p: M\f0\lang1033\'f4 ph\f1\lang1066\u7887?ng d\u7919? li\u7879?u m\f0\lang1033\'e0 kh\'f4ng c\f1\lang1066\u7847?n c\f2\u417? s\f1\u7903? d\u7919? li\u7879?u th\u7853?t, h\u7919?u \f0\lang1033\'edch khi ki\f1\lang1066\u7875?m tra logic.\par
+X\u7917? l\f0\lang1033\'fd null: Lu\'f4n kh\f1\lang1066\u7903?i t\u7841?o danh s\f0\lang1033\'e1ch r\f1\lang1066\u7895?ng v\f0\lang1033\'e0 ki\f1\lang1066\u7875?m tra null \f2\'f0\f1\u7875? tr\f0\lang1033\'e1nh crash.\par
+Debug: S\f1\lang1066\u7917? d\u7909?ng logcat ho\u7863?c breakpoint \f2\'f0\f1\u7875? ki\u7875?m tra lu\u7891?ng d\u7919? li\u7879?u.\par
+T\f0\lang1033\'e0i li\f1\lang1066\u7879?u b\u7893? sung\par
+build.gradle (Module: app): Th\f0\lang1033\'eam c\'e1c th\f2\u432? vi\f1\lang1066\u7879?n c\u7847?n thi\u7871?t:\par
+groovy\par
+\par
+Collapse\par
+\par
+Wrap\par
+\par
+Copy\par
+dependencies \{\par
+    implementation 'androidx.appcompat:appcompat:1.6.1'\par
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'\par
+    implementation 'androidx.lifecycle:lifecycle-livedata:2.6.1'\par
+    implementation 'androidx.lifecycle:lifecycle-viewmodel:2.6.1'\par
+    implementation 'androidx.recyclerview:recyclerview:1.3.0'\par
+    implementation 'com.github.bumptech.glide:glide:4.15.1'\par
+\}\par
+AndroidManifest.xml: Th\f0\lang1033\'eam quy\f1\lang1066\u7873?n Internet (d\f0\lang1033\'f9 kh\'f4ng c\f1\lang1066\u7847?n cho DAO gi\u7843? l\u7853?p):\par
+xml\par
+\par
+Collapse\par
+\par
+Wrap\par
+\par
+Copy\par
+<uses-permission android:name="android.permission.INTERNET" />\par
+T\f0\lang1033\'e0i\lang9\par
+}
+ 
