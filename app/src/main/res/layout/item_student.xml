@@ -6,7 +6,6 @@
     android:layout_height="wrap_content"
     android:padding="8dp">
 
-    <!-- Ảnh đại diện của sinh viên -->
     <ImageView
         android:id="@+id/avatar"
         android:layout_width="50dp"
@@ -14,7 +13,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Tên sinh viên -->
     <TextView
         android:id="@+id/tvName"
         android:layout_width="0dp"
@@ -25,7 +23,6 @@
         app:layout_constraintStart_toEndOf="@id/avatar"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Email sinh viên -->
     <TextView
         android:id="@+id/tvEmail"
         android:layout_width="0dp"
